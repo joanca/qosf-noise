@@ -1,0 +1,9 @@
+services:
+  notebooks:
+    image: "ismaelfaro/qiskit_dev"
+    container_name: qosf_notebook
+    network_mode: host
+    ports:
+      - 8888:8888
+    volumes:
+      - ./src:/qiskit/qosf:rw
