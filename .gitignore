@@ -1,7 +1,10 @@
+# Python
+**/__pycache__/*
+venv/
+
 # Jupyter notebooks
 .ipynb_checkpoints/
 src/.*/
 
 # env
 .env*
-venv/
