@@ -9,9 +9,9 @@ services:
       - users
     ports:
       - 8888:8888
-    working_dir: /home/qosf/work
+    working_dir: /home/qosf/work/notebooks
     volumes:
-      - ./src:/home/qosf/work
+      - ./:/home/qosf/work
     environment:
       - JUPYTER_TOKEN=1234
       - NB_USER=qosf
