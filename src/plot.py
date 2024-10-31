@@ -1,5 +1,6 @@
 from matplotlib import colormaps
 import matplotlib.pyplot as plt
+import random
 
 
 class PlotAxis():
@@ -9,8 +10,14 @@ class PlotAxis():
 
 
 def plot_results(x_axis: PlotAxis, y_axis: PlotAxis, file_name: str):
-    colors = [colormaps["Blues"], colormaps["Reds"], colormaps["Greens"]]
     num_circuits = len(y_axis['data'])
+
+    color_names = list(colormaps)
+    random.shuffle(color_names)
+
+    color_names = color_names[:num_circuits]
+
+    colors = [colormaps[name] for name in color_names]
 
     for i in range(num_circuits):
         plt.figure(file_name + str(i))
@@ -47,19 +54,19 @@ def plot_error(results: list[list], probabilities: list[list]):
     return plot_results(x_axis, y_axis, 'plot_error')
 
 
-def plot_real_results(results: list[list], probabilities: list[list]):
-    real_results = []
+def plot_simulation_results(results: list[list], probabilities: list[list]):
+    simulation_results = []
 
     for result in results:
         real = []
 
         for value in result:
-            real.append(value['real'])
+            real.append(value['result'])
 
-        real_results.append(real)
+        simulation_results.append(real)
 
     y_axis = {
-        'data': real_results,
+        'data': simulation_results,
         'label': 'Result'
     }
 
