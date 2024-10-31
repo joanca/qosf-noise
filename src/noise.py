@@ -1,7 +1,7 @@
+from qiskit.circuit.library import XGate, YGate, ZGate
 from qiskit import QuantumCircuit
-from numpy.random import choice
-
-from utils import get_random_gate
+from qiskit.circuit import CircuitInstruction
+from numpy.random import rand, choice
 
 
 def add_pauli_noise(circuit: QuantumCircuit, a: float, b: float):
@@ -10,8 +10,8 @@ def add_pauli_noise(circuit: QuantumCircuit, a: float, b: float):
 
     Args:
         circuit: The quantum circuit to add noise to.
-        a: Probability of Pauli noise after a one-qubit gate.
-        b: Probability of Pauli noise after a two-qubit gate.
+        a: Probability of applying a Pauli operator on a 1 qubit gate
+        b: Probability of applying a Pauli operator on a 2 qubit gate
 
     Returns:
         The quantum circuit with added Pauli noise.
@@ -20,18 +20,24 @@ def add_pauli_noise(circuit: QuantumCircuit, a: float, b: float):
     noisy_circuit = circuit.copy()
 
     for gate in circuit.data:
-        gate_index = circuit.data.index(gate)
+        gate: CircuitInstruction
+        noisy_circuit.append(gate)
 
-        if len(gate.qubits) == 2:  # Two-qubit gate
-            if choice([True, False], p=[b, 1-b]):
-                pauli_gate = get_random_gate()
+        random_number = rand()
 
-                pauli_gate(noisy_circuit, gate_index)
+        if gate.is_controlled_gate():
+            if random_number < b:
+                noisy_circuit.append(get_random_gate(), gate.qubits)
 
-        else:  # One-qubit gate
-            if choice([True, False], p=[a, 1-a]):
-                pauli_gate = get_random_gate()
-
-                pauli_gate(noisy_circuit, gate_index)
+        else:
+            if random_number < a:
+                noisy_circuit.append(get_random_gate(), gate.qubits)
 
     return noisy_circuit
+
+
+def get_random_gate():
+    random_number = choice([0, 1, 2])
+    gates = [XGate(), YGate(), ZGate()]
+
+    return gates[random_number]
