@@ -46,6 +46,7 @@ pyscf==2.7.0
 python-dateutil==2.9.0.post0
 PyYAML==6.0.2
 qiskit==1.2.4
+qiskit-aer==0.15.1
 readchar==4.2.0
 requests==2.32.2
 runs==1.2.2
