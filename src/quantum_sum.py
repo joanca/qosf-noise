@@ -2,6 +2,7 @@ from qiskit import QuantumCircuit
 import numpy as np
 
 from fourier_transform import apply_qft, apply_inverse_qft
+from decompose_basis import decompose_into_basis
 
 
 def quantum_sum(a: int, b: int) -> QuantumCircuit:
@@ -34,3 +35,10 @@ def quantum_sum(a: int, b: int) -> QuantumCircuit:
     circuit.measure(range(num_qubits), range(num_qubits))
 
     return circuit
+
+
+def decomposed_quantum_sum(a: int, b: int) -> QuantumCircuit:
+    sum_circuit = quantum_sum(a, b)
+    decomposed_sum_circuit = decompose_into_basis(sum_circuit)
+
+    return decomposed_sum_circuit
