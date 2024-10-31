@@ -6,7 +6,7 @@ from typing import List
 
 from noise import add_pauli_noise
 from quantum_sum import decomposed_quantum_sum
-from plot import plot_error
+from plot import plot_error, plot_real_results
 
 SIMULATOR = AerSimulator(method='statevector')
 
@@ -80,4 +80,5 @@ if __name__ == "__main__":
             real_value
         )
 
+        plot_real_results(results, probabilities_to_add_noise)
         plot_error(results, probabilities_to_add_noise)
