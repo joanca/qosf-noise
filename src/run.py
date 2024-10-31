@@ -20,3 +20,5 @@ decomposed_circuit = decompose_into_basis(circuit)
 print(decomposed_circuit)
 
 quantum_sum = quantum_sum(1, 3)
+
+print(quantum_sum)
