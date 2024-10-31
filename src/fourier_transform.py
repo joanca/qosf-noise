@@ -2,7 +2,7 @@ from qiskit import QuantumCircuit, QuantumRegister
 import numpy as np
 
 
-def qft(circuit: QuantumCircuit, register: QuantumRegister) -> QuantumCircuit:
+def apply_qft(circuit: QuantumCircuit, register: QuantumRegister) -> QuantumCircuit:
     """
     Applies the Quantum Fourier Transform (QFT) to a quantum circuit.
 

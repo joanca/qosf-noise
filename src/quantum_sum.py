@@ -1,4 +1,4 @@
-from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
+from qiskit import QuantumCircuit
 import numpy as np
 
 from fourier_transform import apply_qft, apply_inverse_qft
