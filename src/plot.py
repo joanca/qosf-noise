@@ -1,6 +1,7 @@
 from matplotlib import colormaps
 import matplotlib.pyplot as plt
 import random
+import os
 
 
 class PlotAxis():
@@ -9,7 +10,24 @@ class PlotAxis():
         self.label = label
 
 
-def plot_results(x_axis: PlotAxis, y_axis: PlotAxis, file_name: str):
+def is_jupyter_lab():
+    import os
+
+    if 'JPY_PARENT_PID' in os.environ:
+        return True
+
+    return False
+
+
+def get_plot_filename(filename: str):
+    base_dir = '..' if is_jupyter_lab() else '.'
+
+    project_path = os.path.abspath(os.path.join(base_dir))
+
+    return project_path + '/plots/' + filename
+
+
+def plot_results(x_axis: PlotAxis, y_axis: PlotAxis, filename: str):
     num_circuits = len(y_axis['data'])
 
     color_names = list(colormaps)
@@ -20,7 +38,10 @@ def plot_results(x_axis: PlotAxis, y_axis: PlotAxis, file_name: str):
     colors = [colormaps[name] for name in color_names]
 
     for i in range(num_circuits):
-        plt.figure(file_name + str(i))
+        name = filename + '-' + str(i) + '.png'
+        plot_filename = get_plot_filename(name)
+
+        plt.figure(filename + str(i))
         plt.plot(x_axis['data'], y_axis['data'][i],
                  marker="o", color=colors[i](100))
 
@@ -28,7 +49,7 @@ def plot_results(x_axis: PlotAxis, y_axis: PlotAxis, file_name: str):
         plt.xlabel(x_axis['label'])
         plt.ylabel(y_axis['label'])
 
-        plt.savefig('plots/' + file_name + '-' + str(i) + '.png')
+        plt.savefig(plot_filename)
 
 
 def plot_error(results: list[list], probabilities: list[list]):
