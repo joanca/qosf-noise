@@ -9,7 +9,7 @@ services:
       - users
     ports:
       - 8888:8888
-    working_dir: /home/qosf/work/notebooks
+    working_dir: /home/qosf/work
     volumes:
       - ./:/home/qosf/work
     environment:
