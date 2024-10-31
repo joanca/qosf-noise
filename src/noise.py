@@ -24,8 +24,6 @@ def add_pauli_noise(circuit: QuantumCircuit, a: float, b: float):
 
         if len(gate.qubits) == 2:  # Two-qubit gate
             if choice([True, False], p=[b, 1-b]):
-
-                print('two gate')
                 pauli_gate = get_random_gate()
 
                 pauli_gate(noisy_circuit, gate_index)
