@@ -17,7 +17,7 @@ NUMBERS_TO_SUM = [0, 1, 5, 7, 10, 15]
 
 
 def run_simulation(circuits: List[QuantumCircuit]) -> List[Counts]:
-    job = SIMULATOR.run(circuits)
+    job = SIMULATOR.run(circuits, shots=1024)
 
     result = job.result()
     counts = result.get_counts()
@@ -54,7 +54,7 @@ def get_simulation_results(
         simulation_counts = run_simulation(circuits_to_simulate)
 
         for i in range(NUM_CIRCUITS_SIMULATE):
-            most_frequest_result_binary = simulation_counts[i].most_frequent()
+            most_frequest_result_binary = simulation_counts[i].most_frequent().replace(" ", "")
             simulation_result = int(most_frequest_result_binary, base=2)
 
             simulation_result = {

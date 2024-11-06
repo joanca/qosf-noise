@@ -21,7 +21,6 @@ src/
 In order to be able to run this project easily, everything can be executed inside a Docker container, using an image 
 that will be built the first time you run it or by using the following command:
 
-> If you prefer to run the code in your own environment, you can (#virtual-env)[skip to the virtual environment] section below.
 
 ```
 make build
